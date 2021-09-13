@@ -1,0 +1,8 @@
+--- # Ensure password hashing algorithm is SHA-512
+- name: Password hashing
+  lineinfile:
+    path: /etc/pam.d/common-password
+    regexp: 'default=ignore'
+    line: 'password [success=1 default=ignore] pam_unix.so sha512'
+  tags:
+    - pass-sha-512

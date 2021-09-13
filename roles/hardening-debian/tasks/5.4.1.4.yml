@@ -1,0 +1,5 @@
+--- # Ensure inactive password lock is 30 days or less
+- name: Set default password inactivity period to 30 days
+  shell: useradd -D -f 30
+  tags:
+    - pass-inactivity

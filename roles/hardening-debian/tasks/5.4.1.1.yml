@@ -1,0 +1,6 @@
+--- # Set Shadow Password Suite Parameters | Ensure password expiration is 365 days or less
+- name: Set pass max day to 365
+  lineinfile:
+    path: /etc/login.defs
+    regexp: 'PASS_MAX_DAYS   99999'
+    line: 'PASS_MAX_DAYS   365'

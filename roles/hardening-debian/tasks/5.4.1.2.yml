@@ -1,0 +1,8 @@
+--- # Ensure minimum days between password changes is configured
+- name: Configure pass min days
+  lineinfile:
+    path: /etc/login.defs
+    regexp: 'PASS_MIN_DAYS'
+    line: 'PASS_MIN_DAYS 1'
+  tags:
+    - pass-min-days

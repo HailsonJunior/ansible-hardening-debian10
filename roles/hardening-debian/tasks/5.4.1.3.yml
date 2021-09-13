@@ -1,0 +1,8 @@
+--- # Ensure password expiration warning days is 7 or more
+- name: Configure password warn age to 7
+  lineinfile:
+    path: /etc/login.defs
+    regexp: 'PASS_WARN_AGE'
+    line: 'PASS_WARN_AGE 7'
+  tags:
+    - pass-warn

@@ -1,0 +1,9 @@
+--- # Ensure permissions on /etc/passwd- are configure
+- name: Set permission chown on passwd-
+  file:
+    path: /etc/passwd
+    owner: root
+    group: root
+    mode: 0600
+  tags:
+    - permission-passwd-

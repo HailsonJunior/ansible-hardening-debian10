@@ -1,0 +1,11 @@
+--- # Ensure lockout for failed password attempts is configured
+- name: Adjust common auth configuration
+  lineinfile:
+    path: /etc/pam.d/common-auth
+    line: "{{ item.line }}"
+  loop:
+    - { line: 'auth required pam_tally2.so onerr=fail audit silent deny=5 unlock_time=900' }
+    - { line: 'account requisite pam_deny.so' }
+    - { line: 'account required pam_tally2.so' }
+  tags: 
+    - common-auth

@@ -1,0 +1,7 @@
+--- # Ensure password reuse is limited
+- name: Conf password reuse limited
+  lineinfile:
+    path: /etc/pam.d/common-password
+    line: 'password required pam_pwhistory.so remember=5'
+  tags:
+    - pass-reuse-limited

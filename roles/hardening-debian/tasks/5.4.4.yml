@@ -1,0 +1,19 @@
+--- # Ensure default user umask is 027 or more restrictive
+- name: Configure umask bashrc
+  lineinfile:
+    path: /etc/bash.bashrc
+    line: 'umask 027'
+  tags:
+    - bash-umask
+
+- name: Configure umask profile
+  lineinfile:
+    path: /etc/profile
+    line: 'umask 027'
+  tags:
+    - profile-umask
+
+#- name: Configure umask in all others .sh files in profile.d
+#  shell: "echo 'umask 027' >> /etc/profile.d/*.sh"
+#  tags:
+#    - sh-umask

@@ -1,0 +1,10 @@
+--- # Ensure permissions on /etc/group- are configured
+- name: Set permission chown group-
+  shell: chown root:root /etc/group-
+  tags:
+    - permission-group-
+
+- name: set permission chmod group-
+  shell: chmod u-x,go-rwx /etc/group-
+  tags:
+    - permission-group-

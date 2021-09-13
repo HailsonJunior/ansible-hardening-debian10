@@ -1,0 +1,5 @@
+--- # Ensure default group for the root account is GID 0
+- name: Set group root 0
+  shell: usermod -g 0 root
+  tags:
+    - root-group

@@ -1,0 +1,39 @@
+--- # Ensure password creation requirements are configured
+- name: update
+  apt:
+    update_cache: yes
+  tags:
+    - update-cache
+
+- name: Install libpam
+  apt:
+    name:
+      - python-apt
+      - libpam-pwquality
+    state: latest
+  tags:
+    - install-libpam
+
+- name: Adjuste minlen
+  replace:
+    path: /etc/security/pwquality.conf
+    regexp: '# minlen = 8'
+    replace: 'minlen = 14'
+  tags: 
+    - minlen
+
+- name: Adjuste minclass
+  replace:
+    path: /etc/security/pwquality.conf
+    regexp: '# minclass = 0'
+    replace: 'minclass = 4'
+  tags:
+    - minclass
+
+- name: Adjuste pam_pwquality.so
+  lineinfile:
+    path: /etc/pam.d/common-password 
+    regexp: 'pam_pwquality.so retry=' 
+    line: 'password        requisite                       pam_pwquality.so retry=3'
+  tags:
+    - pam_pwquality
