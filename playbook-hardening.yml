@@ -1,7 +1,0 @@
----
-- name: Executa hardening do Debian 10
-  hosts: 'IB-01'
-  become: yes
-  become_method: sudo
-  roles:
-    - { role: hardening-debian, tags: ["hardening-debian"]}

@@ -4,8 +4,12 @@
     path: /etc/pam.d/common-auth
     line: "{{ item.line }}"
   loop:
-    - { line: 'auth required pam_tally2.so onerr=fail audit silent deny=5 unlock_time=900' }
-    - { line: 'account requisite pam_deny.so' }
-    - { line: 'account required pam_tally2.so' }
-  tags: 
-    - common-auth
+    - { line: 'auth     required       pam_tally.so deny=5 onerr=fail per_user unlock_time=600' }
+    
+- name: Adjust common acount configuration
+  lineinfile:
+    path: /etc/pam.d/common-account
+    line: "{{ item.line }}"
+  loop:
+    - { line: 'account required pam_tally.so' }
+  tags: common-account

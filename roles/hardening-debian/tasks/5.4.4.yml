@@ -12,8 +12,3 @@
     line: 'umask 027'
   tags:
     - profile-umask
-
-#- name: Configure umask in all others .sh files in profile.d
-#  shell: "echo 'umask 027' >> /etc/profile.d/*.sh"
-#  tags:
-#    - sh-umask

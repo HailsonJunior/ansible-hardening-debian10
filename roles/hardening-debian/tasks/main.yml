@@ -1,6 +1,6 @@
 ---
 - include: 5.3.1.yml
-# - include: 5.3.2.yml
+- include: 5.3.2.yml
 - include: 5.3.3.yml
 - include: 5.3.4.yml  
 - include: 5.4.1.1.yml  

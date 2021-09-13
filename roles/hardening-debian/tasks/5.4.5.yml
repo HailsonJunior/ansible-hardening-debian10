@@ -1,21 +1,7 @@
 --- # Ensure default user shell timeout is 900 seconds or less
-#- name: Set TMOUT parameters bashrc
-#  lineinfile:
-#    path: /etc/bash.bashrc
-#    line: 'readonly TMOUT=900 ; export TMOUT'
-#  tags:
-#    - tmout-bashrc
-
 - name: Set TMOUT parameters profile
   lineinfile:
     path: /etc/profile
     line: 'readonly TMOUT=900 ; export TMOUT'
   tags:
     - tmout-bashrc
-
-#- name: Set TMOUT parameters in bash_completion
-#  lineinfile:
-#    path: /etc/profile.d/bash_completion.sh
-#    line: 'readonly TMOUT=900 ; export TMOUT'
-#  tags:
-#    - tmout-sh

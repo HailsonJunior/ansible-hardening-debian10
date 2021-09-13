@@ -1,10 +1,4 @@
 --- # Ensure password creation requirements are configured
-- name: update
-  apt:
-    update_cache: yes
-  tags:
-    - update-cache
-
 - name: Install libpam
   apt:
     name:
