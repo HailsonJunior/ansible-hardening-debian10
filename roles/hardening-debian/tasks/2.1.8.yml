@@ -4,4 +4,5 @@
     name: bind9
     state: stopped
     enabled: false
+  ignore_errors: yes
   tags: dns

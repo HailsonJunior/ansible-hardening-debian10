@@ -20,4 +20,5 @@
 
 - name: rmmod jffs2
   shell: rmmod jffs2
+  ignore_errors: True
   tags: jffs2

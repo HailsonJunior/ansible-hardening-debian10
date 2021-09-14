@@ -1,9 +1,16 @@
 --- # Ensure DHCP Server is not enabled
 - name: Disable DHCP service
   service:
-    name:
-      - isc-dhcp-server
-      - isc-dhcp-server6
+    name: isc-dhcp-server
     state: stopped
     enabled: false
+  ignore_errors: yes
+  tags: dhcp
+
+- name: Disable DHCP service
+  service:
+    name: isc-dhcp-server6
+    state: stopped
+    enabled: false
+  ignore_errors: yes
   tags: dhcp

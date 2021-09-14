@@ -6,10 +6,10 @@
     group: root
     mode: '0700'
   loop:
-    - { file: '/etc/crontab' }
-    - { file: '/etc/cron.hourly' }
-    - { file: '/etc/cron.daily' }
-    - { file: '/etc/cron.weekly' }
-    - { file: '/etc/cron.monthly' }
-    - { file: '/etc/cron.d' }
+    - { path: '/etc/crontab' }
+    - { path: '/etc/cron.hourly' }
+    - { path: '/etc/cron.daily' }
+    - { path: '/etc/cron.weekly' }
+    - { path: '/etc/cron.monthly' }
+    - { path: '/etc/cron.d' }
   tags: permission-cron-files

@@ -20,4 +20,5 @@
 
 - name: rmmod udf
   shell: rmmod udf
+  ignore_errors: True
   tags: udf

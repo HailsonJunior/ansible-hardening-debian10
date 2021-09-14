@@ -5,7 +5,7 @@
     line: "{{ item.line }}"
   loop:
     - { line: 'net.ipv4.conf.all.accept_source_route = 0' }
-    - { line: 'net.ipv4.conf.default.accept_source_route = 0'
+    - { line: 'net.ipv4.conf.default.accept_source_route = 0' }
   tags: routed-packets
 
 - name: Ensure source routed packets are not accepted

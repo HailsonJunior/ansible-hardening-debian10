@@ -4,4 +4,5 @@
     name: slapd
     state: stopped
     enabled: false
+  ignore_errors: yes
   tags: ldap

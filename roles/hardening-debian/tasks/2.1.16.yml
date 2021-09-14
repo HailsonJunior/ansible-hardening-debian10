@@ -4,4 +4,5 @@
     name: rsync
     state: stopped
     enabled: false
+  ignore_errors: yes
   tags: rsync

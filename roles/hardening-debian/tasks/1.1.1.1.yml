@@ -20,4 +20,5 @@
 
 - name: rmmod freevxfs
   shell: rmmod freevxfs
+  ignore_errors: True
   tags: freevxfs

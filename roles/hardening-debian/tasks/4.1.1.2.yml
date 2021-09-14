@@ -4,4 +4,5 @@
     name: auditd
     state: started
     enabled: yes
+  ignore_errors: yes
   tags: enable-audit

@@ -1,4 +1,10 @@
 --- # Ensure unsuccessful unauthorized file access attempts are collected 
+- name: Create rules directory
+  file:
+    path: /etc/audit/rules.d/
+    state: directory
+  tags: create-dir-rules
+
 - name: Create access.rules file
   file:
     path: /etc/audit/rules.d/access.rules

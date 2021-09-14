@@ -15,5 +15,5 @@
 - name: Configure sudo log file
   lineinfile:
     path: /etc/sudoers.d/log
-    line: 'Defaults logfile=\"/var/log/sudo.log\" '
+    line: 'Defaults logfile="/var/log/sudo.log"'
   tags: sudo-log

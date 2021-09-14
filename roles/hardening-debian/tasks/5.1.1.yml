@@ -4,4 +4,5 @@
     name: cron
     state: started
     enabled: yes
+  ignore_errors: yes
   tags: enable-cron

@@ -20,4 +20,5 @@
 
 - name: rmmod usb-storage
   shell: rmmod usb-storage
+  ignore_errors: True
   tags: usb

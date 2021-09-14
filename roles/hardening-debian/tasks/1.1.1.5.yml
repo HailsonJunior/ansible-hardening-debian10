@@ -20,4 +20,5 @@
 
 - name: rmmod squashfs
   shell: rmmod squashfs
+  ignore_errors: True
   tags: squashfs

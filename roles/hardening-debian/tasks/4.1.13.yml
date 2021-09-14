@@ -5,7 +5,7 @@
     state: touch
   tags: create-delete-rules
 
-- name: Empty file:
+- name: Empty file
   lineinfile:
     path: /etc/audit/rules.d/delete.rules
     state: absent

@@ -1,6 +1,7 @@
 --- # Disable Automounting
 - name: Disable autofs
   shell: systemctl --now disable autofs
+  ignore_errors: yes
   tags: autofs
 
 - name: Remove autofs

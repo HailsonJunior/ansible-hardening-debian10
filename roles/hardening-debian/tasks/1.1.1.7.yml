@@ -21,4 +21,5 @@
 
 - name: rmmod vfat
   shell: rmmod vfat
+  ignore_errors: True
   tags: fat

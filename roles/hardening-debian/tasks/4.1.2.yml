@@ -1,5 +1,5 @@
 --- # Configure Data Retention
-- name: Empty auditd conf file:
+- name: Empty auditd conf file
   lineinfile:
     path: /etc/audit/auditd.conf
     state: absent

@@ -20,4 +20,5 @@
 
 - name: rmmod hfsplus
   shell: rmmod hfsplus
+  ignore_errors: True
   tags: hfsplus
