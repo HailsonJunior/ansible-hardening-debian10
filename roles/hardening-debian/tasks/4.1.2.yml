@@ -1,0 +1,42 @@
+--- # Configure Data Retention
+- name: Empty auditd conf file:
+  lineinfile:
+    path: /etc/audit/auditd.conf
+    state: absent
+    regexp: '^(.*)$'
+  tags: data-retention
+
+- name: Configure Data Retention - auditd.conf
+  blockinfile:
+    path: /etc/audit/auditd.conf
+    block: |
+      local_events = yes
+      log_file = /var/log/audit/audit.log
+      write_logs = yes
+      log_format = ENRICHED
+      log_group = root
+      flush = INCREMENTAL_ASYNC
+      freq = 100
+      num_logs = 4
+      priority_boost = 4
+      disp_qos = lossless
+      dispatcher = /sbin/audispd
+      max_log_file = 30
+      max_log_file_action = ROTATE 
+      space_left = 1000
+      space_left_action = SYSLOG
+      admin_space_left = 500
+      admin_space_left_action = SYSLOG
+      disk_full_action = SYSLOG
+      disk_error_action = SYSLOG
+      use_libwrap = yes
+      #tcp_listen_port = 60
+      #tcp_listen_queue = 5
+      #tcp_max_per_addr = 1
+      #tcp_client_ports = 1024-65535
+      #tcp_client_max_idle = 0
+      enable_krb5 = no
+      krb5_principal = auditd
+      ##krb5_key_file = /etc/audit/audit.key
+      distribute_network = no
+  tags: data-retention

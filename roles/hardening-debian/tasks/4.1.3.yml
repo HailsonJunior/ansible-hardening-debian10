@@ -1,0 +1,24 @@
+--- # Ensure events that modify date and time information are collected
+- name: Create time-change.rules file
+  file:
+    path: /etc/audit/rules.d/time-change.rules
+    state: touch
+  tags: time-change-rules
+
+- name: Empty time-change.rules file
+  lineinfile:
+    path: /etc/audit/rules.d/time-change.rules
+    state: absent
+    regexp: '^(.*)$'
+  tags: time-change-rules
+
+- name: Configure time-change.rules file
+  blockinfile:
+    path: /etc/audit/rules.d/time-change.rules
+    block: |
+      -a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change 
+      -a always,exit -F arch=b32 -S adjtimex -S settimeofday -S stime -k time-change 
+      -a always,exit -F arch=b64 -S clock_settime -k time-change 
+      -a always,exit -F arch=b32 -S clock_settime -k time-change 
+      -w /etc/localtime -p wa -k time-change
+  tags: time-change-rules

@@ -1,0 +1,19 @@
+--- # Ensure remote login warning banner is configured properly
+- name: Create issue.net file
+  file:
+    path: /etc/issue.net
+    state: touch
+  tags: issue-net
+
+- name: Empty file
+  lineinfile:
+    path: /etc/issue.net
+    state: absent
+    regexp: '^(.*)$'
+  tags: issue-net
+
+- name: Configure issue.net file
+  lineinfile:
+    path: /etc/issue.net
+    line: 'Authorized uses only. All activity may be monitored and reported.'
+  tags: issue-net

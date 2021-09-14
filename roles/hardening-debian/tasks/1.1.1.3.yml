@@ -1,0 +1,23 @@
+--- # Ensure mounting of hfs filesystems is disabled
+- name: Create hfs file
+  file:
+    path: /etc/modprobe.d/hfs.conf
+    state: touch
+  tags: hfs
+
+- name: Empty file
+  lineinfile:
+    path: /etc/modprobe.d/hfs.conf
+    state: absent
+    regexp: '^(.*)$'
+  tags: hfs
+
+- name: Disable mounting of hfs filesystems
+  lineinfile:
+    path: /etc/modprobe.d/hfs.conf
+    line: 'install hfs /bin/true'
+  tags: hfs
+
+- name: rmmod hfs
+  shell: rmmod hfs
+  tags: hfs

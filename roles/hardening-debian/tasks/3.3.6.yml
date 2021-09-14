@@ -1,0 +1,10 @@
+--- # Ensure bogus ICMP responses are ignored~
+- name: Ensure bogus ICMP responses are ignored - hardening.conf
+  lineinfile:
+    path: /etc/sysctl.d/hardening.conf
+    line: 'net.ipv4.icmp_ignore_bogus_error_responses = 1'
+  tags: icmp-responses
+
+- name: Ensure bogus ICMP responses are ignored - systcl
+  shell: sysctl -w net.ipv4.icmp_ignore_bogus_error_responses=1
+  tags: icmp-responses

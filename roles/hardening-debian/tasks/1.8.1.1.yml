@@ -1,0 +1,7 @@
+--- # Ensure message of the day is configured properly
+- name: Configure motd
+  lineinfile:
+    path: /etc/motd
+    state: absent
+    regexp: '^(.*)$'
+  tags: motd

@@ -1,0 +1,23 @@
+--- # Ensure mounting of jffs2 filesystems is disabled
+- name: Create jffs2 file
+  file:
+    path: /etc/modprobe.d/jffs2.conf
+    state: touch
+  tags: jffs2
+
+- name: Empty file
+  lineinfile:
+    path: /etc/modprobe.d/jffs2.conf
+    state: absent
+    regexp: '^(.*)$'
+  tags: jffs2
+
+- name: Disable mounting of jffs2 filesystems
+  lineinfile:
+    path: /etc/modprobe.d/jffs2.conf
+    line: 'install jffs2 /bin/true'
+  tags: jffs2
+
+- name: rmmod jffs2
+  shell: rmmod jffs2
+  tags: jffs2

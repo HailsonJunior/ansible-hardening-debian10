@@ -1,0 +1,6 @@
+--- # Ensure updates, patches, and additional security software are installed
+- name: Upgrade 
+  apt:
+    name: "*"
+    state: latest
+  tags: upgrade

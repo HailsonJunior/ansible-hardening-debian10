@@ -1,0 +1,23 @@
+--- # Ensure mounting of squashfs filesystems is disabled
+- name: Create squashfs file
+  file:
+    path: /etc/modprobe.d/squashfs.conf
+    state: touch
+  tags: squashfs
+
+- name: Empty file
+  lineinfile:
+    path: /etc/modprobe.d/squashfs.conf
+    state: absent
+    regexp: '^(.*)$'
+  tags: squashfs
+
+- name: Disable mounting of squashfs filesystems
+  lineinfile:
+    path: /etc/modprobe.d/squashfs.conf
+    line: 'install squashfs /bin/true'
+  tags: squashfs
+
+- name: rmmod squashfs
+  shell: rmmod squashfs
+  tags: squashfs

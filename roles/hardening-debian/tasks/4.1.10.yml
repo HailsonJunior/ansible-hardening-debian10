@@ -1,0 +1,23 @@
+--- # Ensure unsuccessful unauthorized file access attempts are collected 
+- name: Create access.rules file
+  file:
+    path: /etc/audit/rules.d/access.rules
+    state: touch
+  tags: create-access-rules
+
+- name: Empty file
+  lineinfile:
+    path: /etc/audit/rules.d/access.rules
+    state: absent
+    regexp: '^(.*)$'
+  tags: empty-access-rules
+
+- name: configure access.rules file
+  blockinfile:
+    path: /etc/audit/rules.d/access.rules
+    block: |
+      -a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access 
+      -a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access 
+      -a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access 
+      -a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access
+  tags: configure-access-rules

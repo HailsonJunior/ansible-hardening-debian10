@@ -1,0 +1,30 @@
+--- # Disable IPv6
+- name: Disable IPv6
+  lineinfile:
+    path: /etc/default/grub
+    regexp: 'GRUB_CMDLINE_LINUX'
+    line: 'GRUB_CMDLINE_LINUX="ipv6.disable=1"'
+  tags: disable-ipv6
+
+- name: Update grub
+  shell: update-grub -o /boot/grub/grub.cfg
+  tags: disable-ipv6
+
+- name: Disable IPv6 in sysctl.d - create file
+  file:
+    path: /etc/sysctl.d/hardening
+    state: touch
+  tags: disable-ipv6
+
+- name: Disable IPv6 in sysctl.d - configure
+  blockinfile:
+    path: /etc/sysctl.d/hardening
+    block: |
+      net.ipv6.conf.all.disable_ipv6 = 1
+      net.ipv6.conf.default.disable_ipv6 = 1
+      net.ipv6.conf.lo.disable_ipv6 = 1
+      net.ipv6.conf.all.disable_ipv6 = 1
+      net.ipv6.conf.default.disable_ipv6 = 1
+      net.ipv6.conf.lo.disable_ipv6 = 1
+  tags: disable-ipv6
+

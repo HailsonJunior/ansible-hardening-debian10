@@ -1,0 +1,17 @@
+--- # Ensure Reverse Path Filtering is enabled1~
+- name: Ensure Reverse Path Filtering is enabled - hardening.conf
+  lineinfile:
+    path: /etc/sysctl.d/hardening.conf
+    line: "{{ item.line }}"
+  loop:
+    - { line: 'net.ipv4.conf.all.rp_filter = 1' }
+    - { line: 'net.ipv4.conf.default.rp_filter = 1' }
+  tags: reverse-path-filtering
+
+- name: Ensure Reverse Path Filtering is enabled - sysctl
+  shell: sysctl -w net.ipv4.conf.all.rp_filter=1
+  tags: reverse-path-filtering
+
+- name: Ensure Reverse Path Filtering is enabled - sysctl
+  shell: sysctl -w net.ipv4.conf.default.rp_filter=1
+  tags: reverse-path-filtering

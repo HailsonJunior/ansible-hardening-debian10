@@ -1,0 +1,6 @@
+--- # Ensure openbsd-inetd is not installed
+- name: Remove openbsd-inetd
+  apt:
+    name: openbsd-inetd
+    state: absent
+  tags: openbsd-inetd

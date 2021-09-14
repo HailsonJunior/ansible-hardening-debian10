@@ -1,0 +1,23 @@
+--- # Ensure mounting of hfsplus filesystems is disabled
+- name: Create hfsplus file
+  file:
+    path: /etc/modprobe.d/hfsplus.conf
+    state: touch
+  tags: hfsplus
+
+- name: Empty file
+  lineinfile:
+    path: /etc/modprobe.d/hfsplus.conf
+    state: absent
+    regexp: '^(.*)$'
+  tags: hfsplus
+
+- name: Disable mounting of hfsplus filesystems
+  lineinfile:
+    path: /etc/modprobe.d/hfsplus.conf
+    line: 'install hfsplus /bin/true'
+  tags: hfsplus
+
+- name: rmmod hfsplus
+  shell: rmmod hfsplus
+  tags: hfsplus

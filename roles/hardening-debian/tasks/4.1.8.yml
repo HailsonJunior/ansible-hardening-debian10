@@ -1,0 +1,22 @@
+--- # Ensure session initiation information is collected
+- name: Create session.rules file
+  file:
+    path: /etc/audit/rules.d/session.rules
+    state: touch
+  tags: create-session-rules
+
+- name: Empty file 
+  lineinfile:
+    path: /etc/audit/rules.d/session.rules
+    state: absent
+    regexp: '^(.*)$'
+  tags: empty-session-rules
+
+- name: Configure session.rules file
+  blockinfile:
+    path: /etc/audit/rules.d/session.rules
+    block: |
+      -w /var/run/utmp -p wa -k session 
+      -w /var/log/wtmp -p wa -k logins 
+      -w /var/log/btmp -p wa -k logins
+  tags: configure-session-rules

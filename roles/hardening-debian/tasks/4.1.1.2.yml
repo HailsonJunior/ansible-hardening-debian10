@@ -1,0 +1,7 @@
+--- # Ensure auditd service is enabled
+- name: Enable audit service
+  service:
+    name: auditd
+    state: started
+    enabled: yes
+  tags: enable-audit

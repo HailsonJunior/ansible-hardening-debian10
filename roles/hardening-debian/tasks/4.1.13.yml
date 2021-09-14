@@ -1,0 +1,21 @@
+--- # Ensure file deletion events by users are collected 
+- name: Create delete.rules file
+  file:
+    path: /etc/audit/rules.d/delete.rules
+    state: touch
+  tags: create-delete-rules
+
+- name: Empty file:
+  lineinfile:
+    path: /etc/audit/rules.d/delete.rules
+    state: absent
+    regexp: '^(.*)$'
+  tags: empty-delete-rules
+
+- name: Configure delete.rules file
+  blockinfile:
+    path: /etc/audit/rules.d/delete.rules
+    block: |
+      -a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=4294967295 -k delete 
+      -a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=4294967295 -k delete
+  tags: configure-delete-rules

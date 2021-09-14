@@ -1,0 +1,22 @@
+--- # Ensure login and logout events are collected
+- name: Create logins.rules file
+  file:
+    path: /etc/audit/rules.d/logins.rules
+    state: touch
+  tags: create-logins-rules
+
+- name: Empty file
+  lineinfile:
+    path: /etc/audit/rules.d/logins.rules
+    state: absent
+    regexp: '^(.*)$'
+  tags: empty-logins-rules
+
+- name: Configure logins.rules file
+  blockinfile:
+    path: /etc/audit/rules.d/logins.rules
+    block: |
+      -w /var/log/faillog -p wa -k logins 
+      -w /var/log/lastlog -p wa -k logins 
+      -w /var/log/tallylog -p wa -k logins
+  tags: configure-logins-rules

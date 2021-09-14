@@ -1,0 +1,11 @@
+--- # Ensure audit_backlog_limit is sufficient1~
+- name: Ensure audit_backlog_limit is sufficient - edit grub
+  lineinfile:
+    path: /etc/default/grub
+    regexp: 'GRUB_CMDLINE_LINUX="audit=1"'
+    line: 'GRUB_CMDLINE_LINUX="audit=1 audit_backlog_limit=8192"'
+  tags: audit-block-limit
+
+- name: Update grub
+  shell: update-grub -o /boot/grub/grub.cfg
+  tags: audit-block-limit

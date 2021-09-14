@@ -1,0 +1,23 @@
+--- # Ensure mounting of freevxfs filesystems is disabled 
+- name: Create freevcfs file
+  file:
+    path: /etc/modprobe.d/freevxfs.conf
+    state: touch
+  tags: freevxfs
+
+- name: Empty file
+  lineinfile:
+    path: /etc/modprobe.d/freevxfs.conf
+    state: absent
+    regexp: '^(.*)$'
+  tags: freevxfs
+
+- name: Add line to freevcfs file
+  lineinfile:
+    path: /etc/modprobe.d/freevxfs.conf
+    line: 'install freevxfs /bin/true'
+  tags: freevxfs
+
+- name: rmmod freevxfs
+  shell: rmmod freevxfs
+  tags: freevxfs

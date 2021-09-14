@@ -1,0 +1,23 @@
+--- # Disable USB Storage
+- name: Create USB file
+  file:
+    path: /etc/modprobe.d/usb_storage.conf
+    state: touch
+  tags: usb
+
+- name: Empty file
+  lineinfile:
+    path: /etc/modprobe.d/usb_storage.conf
+    state: absent
+    regexp: '(.*)$'
+  tags: usb
+
+- name: Disable USB Storage
+  lineinfile:
+    path: /etc/modprobe.d/usb_storage.conf
+    line: 'install usb-storage /bin/true'
+  tags: usb
+
+- name: rmmod usb-storage
+  shell: rmmod usb-storage
+  tags: usb

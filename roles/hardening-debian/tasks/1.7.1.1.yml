@@ -1,0 +1,6 @@
+--- # Ensure AppArmor is installed
+- name: Install AppArmor
+  apt:
+    name: apparmor
+    state: latest
+  tags: apparmor

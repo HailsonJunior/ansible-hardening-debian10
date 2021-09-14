@@ -1,0 +1,8 @@
+--- # Ensure auditd is installed
+- name: Install auditd
+  apt:
+    name:
+      - auditd
+      - audispd-plugins
+    state: latest
+  tags: install-auditd

@@ -1,0 +1,17 @@
+--- # Ensure source routed packets are not accepted
+- name: Configure hardening.conf to disable routed packets
+  lineinfile:
+    path: /etc/sysctl.d/hardening.conf
+    line: "{{ item.line }}"
+  loop:
+    - { line: 'net.ipv4.conf.all.accept_source_route = 0' }
+    - { line: 'net.ipv4.conf.default.accept_source_route = 0'
+  tags: routed-packets
+
+- name: Ensure source routed packets are not accepted
+  shell: sysctl -w net.ipv4.conf.all.accept_source_route=0
+  tags: routed-packets
+
+- name: Ensure source routed packets are not accepted
+  shell: sysctl -w net.ipv4.conf.default.accept_source_route=0
+  tags: routed-packets

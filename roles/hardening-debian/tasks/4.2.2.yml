@@ -1,0 +1,7 @@
+--- # Journald config
+- name: Configure joutnald file
+  lineinfile:
+    path: /etc/systemd/journald.conf
+    regexp: 'Storage='
+    line: 'Storage=persistent'
+  tags: configure-fournald

@@ -1,0 +1,7 @@
+--- # Ensure cron daemon is enabled
+- name: Enable cron service
+  service:
+    name: cron
+    state: started
+    enabled: yes
+  tags: enable-cron

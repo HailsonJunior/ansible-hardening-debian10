@@ -1,0 +1,15 @@
+--- # Ensure permissions on /etc/crontab are configured 
+- name: Configure permission cron files
+  file:
+    path: "{{ item.path }}"
+    owner: root
+    group: root
+    mode: '0700'
+  loop:
+    - { file: '/etc/crontab' }
+    - { file: '/etc/cron.hourly' }
+    - { file: '/etc/cron.daily' }
+    - { file: '/etc/cron.weekly' }
+    - { file: '/etc/cron.monthly' }
+    - { file: '/etc/cron.d' }
+  tags: permission-cron-files

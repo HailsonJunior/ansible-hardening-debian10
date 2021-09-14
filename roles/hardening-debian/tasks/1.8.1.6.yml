@@ -1,0 +1,8 @@
+--- # Ensure permissions on /etc/issue.net are configured
+- name: Configure issue.net permission
+  file:
+    path: /etc/issue.net 
+    owner: root
+    group: root
+    mode: '0644'
+  tags: issue-net

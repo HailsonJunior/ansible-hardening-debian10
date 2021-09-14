@@ -1,0 +1,19 @@
+--- # Ensure local login warning banner is configured properly
+- name: Create issue file
+  file:
+    path: /etc/issue
+    state: touch
+  tags: issue
+
+- name: Empty file
+  lineinfile:
+    path: /etc/issue
+    state: absent
+    regexp: '^(.*)$'
+  tags: issue
+
+- name: Confgure issue
+  lineinfile:
+    path: /etc/issue
+    line: 'Authorized uses only. All activity may be monitored and reported.'
+  tags: issue

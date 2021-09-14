@@ -1,0 +1,21 @@
+--- # Ensure events that modify the system's Mandatory Access Controls are collected
+- name: Create MAC-policy.rules files
+  file:
+    path: /etc/audit/rules.d/MAC-policy.rules
+    state: touch
+  tags: mac-policy-rules
+
+- name: Empyt file
+  lineinfile:
+    path: /etc/audit/rules.d/MAC-policy.rules
+    state: absent
+    regexp: '^(.*)$'
+  tags: mac-policy-rules
+
+- name: Configure MAC-policy.rules files
+  blockinfile:
+    path: /etc/audit/rules.d/MAC-policy.rules
+    block: |
+      -w /etc/apparmor/ -p wa -k MAC-policy 
+      -w /etc/apparmor.d/ -p wa -k MAC-policy
+  tags: mac-policy-rules

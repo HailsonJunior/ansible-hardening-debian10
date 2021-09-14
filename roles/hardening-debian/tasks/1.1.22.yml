@@ -1,0 +1,10 @@
+--- # Disable Automounting
+- name: Disable autofs
+  shell: systemctl --now disable autofs
+  tags: autofs
+
+- name: Remove autofs
+  apt:
+    name: autofs
+    state: absent
+  tags: autofs

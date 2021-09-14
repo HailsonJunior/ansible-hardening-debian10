@@ -1,0 +1,23 @@
+--- # Ensure kernel module loading and unloading is collected
+- name: Create modules.rules file
+  file:
+    path: /etc/audit/rules.d/modules.rules
+    state: touch
+  tags: create-modules-rules
+
+- name: Empty modules.rules file
+  lineinfile:
+    path: /etc/audit/rules.d/modules.rules
+    state: absent
+    regexp: '^(.*)$'
+  tags: empty-modules-rules
+
+- name: Configure modules.rules file
+  blockinfile:
+    path: /etc/audit/rules.d/modules.rules
+    block: |
+      -w /sbin/insmod -p x -k modules 
+      -w /sbin/rmmod -p x -k modules 
+      -w /sbin/modprobe -p x -k modules 
+      -a always,exit -F arch=b64 -S init_module -S delete_module -k modules
+  tags: configure-modules-rules

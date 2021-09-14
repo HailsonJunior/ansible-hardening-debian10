@@ -1,0 +1,21 @@
+--- # Ensure successful file system mounts are collected
+- name: Create mounts file
+  file:
+    path: /etc/audit/rules.d/mounts.rules
+    state: touch
+  tags: create-mounts
+
+- name: Empty file
+  lineinfile:
+    path: /etc/audit/rules.d/mounts.rules
+    state: absent
+    regexp: '^(.*)$'
+  tags: empty-create-mounts
+
+- name: Configure mounts file
+  blockinfile:
+    path: /etc/audit/rules.d/mounts.rules
+    block: |
+      -a always,exit -F arch=b64 -S mount -F auid>=1000 -F auid!=4294967295 -k mounts 
+      -a always,exit -F arch=b32 -S mount -F auid>=1000 -F auid!=4294967295 -k mounts
+  tags: configure-create-mounts

@@ -1,0 +1,23 @@
+--- #Ensure mounting of udf filesystems is disabled
+- name: Create udf file
+  file:
+    path: /etc/modprobe.d/udf.conf
+    state: touch
+  tags: udf
+
+- name: Empty file
+  lineinfile:
+    path: /etc/modprobe.d/udf.conf
+    state: absent
+    regexp: '(.*)$'
+  tags: udf
+
+- name: Disable mounting of udf filesystems
+  lineinfile:
+    path: /etc/modprobe.d/udf.conf
+    line: 'install udf /bin/true'
+  tags: udf
+
+- name: rmmod udf
+  shell: rmmod udf
+  tags: udf

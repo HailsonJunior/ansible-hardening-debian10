@@ -1,0 +1,6 @@
+--- # Ensure xinetd is not installed
+- name: Remove xinetd
+  apt:
+    name: xinetd
+    state: absent
+  tags: xinetd

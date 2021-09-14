@@ -1,0 +1,17 @@
+--- # Ensure secure ICMP redirects are not accepted
+- name: Ensure secure ICMP redirects are not accepted - hardening.conf
+  lineinfile:
+    path: /etc/sysctl.d/hardening.conf
+    line: "{{ item.line }}"
+  loop:
+    - { line: 'net.ipv4.conf.all.secure_redirects = 0' }
+    - { line: 'net.ipv4.conf.default.secure_redirects = 0' }
+  tags: icmp
+
+- name: Ensure secure ICMP redirects are not accepted - sysctl
+  shell: sysctl -w net.ipv4.conf.all.secure_redirects=0
+  tags: icmp
+
+- name: Ensure secure ICMP redirects are not accepted - sysctl
+  shell: sysctl -w net.ipv4.conf.default.secure_redirects=0
+  tags: icmp

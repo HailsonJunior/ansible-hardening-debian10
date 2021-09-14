@@ -1,0 +1,24 @@
+--- # Ensure events that modify user/group information are collected
+- name: Create identity.rules file
+  file:
+    path: /etc/audit/rules.d/identity.rules
+    state: touch
+  tags: identity-rules
+
+- name: Empty file
+  lineinfile:
+    path: /etc/audit/rules.d/identity.rules
+    state: absent
+    regexp: '^(.*)$'
+  tags: identity-rules
+
+- name: Configure identity-rules file
+  blockinfile:
+    path: /etc/audit/rules.d/identity.rules
+    block: |
+      -w /etc/group -p wa -k identity 
+      -w /etc/passwd -p wa -k identity 
+      -w /etc/gshadow -p wa -k identity 
+      -w /etc/shadow -p wa -k identity 
+      -w /etc/security/opasswd -p wa -k identity
+  tags: identity-rules

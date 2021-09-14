@@ -1,0 +1,6 @@
+--- # Ensure sudo is installed
+- name: Install sudo-ldap
+  apt:
+    name: sudo-ldap
+    state: latest
+  tags: sudo-ldap

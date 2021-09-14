@@ -1,0 +1,21 @@
+--- # Ensure changes to system administration scope (sudoers) is collected
+- name: Create scope.rules file
+  file:
+    path: /etc/audit/rules.d/scope.rules
+    state: touch
+  tags: crete-scope-rules
+
+- name: Empty scope.rules file
+  lineinfile:
+    path: /etc/audit/rules.d/scope.rules
+    state: absent
+    regexp: '^(.*)$'
+  tags: empty-scope-rules
+
+- name: Configure scope.rules file
+  blockinfile:
+    path: /etc/audit/rules.d/scope.rules
+    block: |
+      -w /etc/sudoers -p wa -k scope 
+      -w /etc/sudoers.d/ -p wa -k scope
+  tags: configure-scope-rules

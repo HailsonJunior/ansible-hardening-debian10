@@ -1,0 +1,8 @@
+--- # Ensure permissions on SSH public host key files are configured
+- name: Ensure permissions on SSH public host key files are configured
+  shell: find /etc/ssh -xdev -type f -name 'ssh_host_*_key.pub' -exec chmod go-wx {} \;
+  tags: permission-ssh-public
+
+- name: Ensure permissions on SSH public host key files are configured
+  shell: find /etc/ssh -xdev -type f -name 'ssh_host_*_key.pub' -exec chown root:root {} \;
+  tags: permission-ssh-public

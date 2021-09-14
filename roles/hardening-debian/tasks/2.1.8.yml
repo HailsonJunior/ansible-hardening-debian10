@@ -1,0 +1,7 @@
+--- # Ensure DNS Server is not enabled
+- name: Disable DNS service
+  service:
+    name: bind9
+    state: stopped
+    enabled: false
+  tags: dns

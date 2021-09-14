@@ -1,0 +1,8 @@
+--- # Ensure permissions on SSH private host key files are configured 
+- name: Ensure permissions on SSH private host key files are configured
+  shell: find /etc/ssh -xdev -type f -name 'ssh_host_*_key' -exec chown root:root {} \;
+  tags: permission-ssh-private
+
+- name: Ensure permissions on SSH private host key files are configured
+  shell: find /etc/ssh -xdev -type f -name 'ssh_host_*_key' -exec chmod 0600 {} \;
+  tags: permission-ssh-private

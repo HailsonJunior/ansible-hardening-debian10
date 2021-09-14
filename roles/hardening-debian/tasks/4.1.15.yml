@@ -1,0 +1,20 @@
+--- # Ensure system administrator actions (sudolog) are collected
+- name: Create actions.rules file
+  file:
+    path: /etc/audit/rules.d/actions.rules
+    state: touch
+  tags: create-actions-rules
+
+- name: Empty actions.rules file
+  lineinfile:
+    path: /etc/audit/rules.d/actions.rules
+    state: absent
+    regexp: '^(.*)$'
+  tags: empty-actions-rules
+
+- name: Configure actions.rules file
+  blockinfile:
+    path: /etc/audit/rules.d/actions.rules
+    block: |
+      -w /var/log/sudo.log -p wa -k actions
+  tags: configure-actions-rules

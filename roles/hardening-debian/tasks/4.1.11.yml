@@ -1,0 +1,22 @@
+--- # Ensure use of privileged commands is collected
+- name: Create privileged.rules file
+  file:
+    path: /etc/audit/rules.d/privileged.rules
+    state: touch
+  tags: create-privileged-rules
+
+- name: Empty file
+  lineinfile:
+    path: /etc/audit/rules.d/privileged.rules
+    state: absent
+    regexp: '^(.*)$'
+  tags: empty-privileged-rules
+
+- name: Configure privileged.rules file
+  blockinfile:
+    path: /etc/audit/rules.d/privileged.rules
+    block: |
+      find <partition> -xdev \( -perm -4000 -o -perm -2000 \) -type f | awk '{print \ 
+      "-a always,exit -F path=" $1 " -F perm=x -F auid>=1000 -F auid!=4294967295 \
+      -k privileged" }'
+  tags: configure-privileged-rules

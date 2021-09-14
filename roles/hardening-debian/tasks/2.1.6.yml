@@ -1,0 +1,7 @@
+--- # Ensure LDAP server is not enabled
+- name: Disabel LDAP service
+  service:
+    name: slapd
+    state: stopped
+    enabled: false
+  tags: ldap

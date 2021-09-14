@@ -1,0 +1,7 @@
+--- # Ensure rsync service is not enabled
+- name: Disable rsync service
+  service:
+    name: rsync
+    state: stopped
+    enabled: false
+  tags: rsync

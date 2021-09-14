@@ -1,0 +1,7 @@
+--- # Ensure FTP Server is not enabled
+- name: Disable FTP service
+  service:
+    name: vsftpd
+    state: stopped
+    enabled: false
+  tags: ftp

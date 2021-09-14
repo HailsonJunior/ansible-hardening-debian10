@@ -1,0 +1,24 @@
+--- # Ensure mounting of FAT filesystems is limited
+- name: Create FAT file
+  file:
+    path: /etc/modprobe.d/vfat.conf
+    state: touch
+  tags: fat
+
+- name: Empty file
+  file:
+    path: /etc/modprobe.d/vfat.conf
+    state: absent
+    regexp: '^(.*)$'
+  tags: fat
+
+- name: Limit mounting of FAT filesystems
+  lineinfile:
+    path: /etc/modprobe.d/vfat.conf
+    line: 'install vfat /bin/true'
+    create: yes
+  tags: fat
+
+- name: rmmod vfat
+  shell: rmmod vfat
+  tags: fat

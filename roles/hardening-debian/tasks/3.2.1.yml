@@ -1,0 +1,16 @@
+--- # Ensure packet redirect sending is disabled
+- name: Create hardening.conf file
+  file:
+    path: /etc/sysctl.d/hardening.conf
+    state: touch
+  
+- name: Configure hardening.conf file
+  lineinfile:
+    path: /etc/sysctl.d/hardening.conf
+    line: 'net.ipv4.conf.all.send_redirects = 0\nnet.ipv4.conf.default.send_redirects = 0'
+
+- name: Ensure packet redirect sending is disabled
+  shell: sysctl -w net.ipv4.conf.all.send_redirects=0
+
+- name: Ensure packet redirect sending is disabled
+  shell: sysctl -w net.ipv4.conf.default.send_redirects=0

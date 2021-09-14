@@ -1,0 +1,11 @@
+--- # Ensure auditing for processes that start prior to auditd is enabled 
+- name: Edit grub file - ensure auditing for processes that start prior to auditd is enabled
+  lineinfile:
+    path: /etc/default/grub
+    regexp: 'GRUB_CMDLINE_LINUX='
+    line: 'GRUB_CMDLINE_LINUX="audit=1"'
+  tags: audit
+
+- name: Update grub
+  shell: update-grub -o /boot/grub/grub.cfg
+  tags: audit

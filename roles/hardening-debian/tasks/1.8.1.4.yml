@@ -1,0 +1,8 @@
+--- # Ensure permissions on /etc/motd are configured
+- name: Configure motd permission
+  file:
+    path: /etc/motd
+    owner: root
+    group: root
+    mode: '0644'
+  tags: motd

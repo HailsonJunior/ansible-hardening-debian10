@@ -1,0 +1,26 @@
+--- # Ensure events that modify the system's network environment are collected
+- name: Create system-locale.rules file
+  file:
+    path: /etc/audit/rules.d/system-locale.rules
+    state: touch
+  tags: system-locale-rules
+
+- name: Empty file:
+  lineinfile:
+    path: /etc/audit/rules.d/system-locale.rules
+    state: absent
+    regexp: '^(.*)$'
+  tags: system-locale-rules
+
+- name: Configure system-locale.rules file
+  blockinfile:
+    path: /etc/audit/rules.d/system-locale.rules
+    block: |
+      -a always,exit -F arch=b64 -S sethostname -S setdomainname -k system-locale 
+      -a always,exit -F arch=b32 -S sethostname -S setdomainname -k system-locale 
+      -w /etc/issue -p wa -k system-locale 
+      -w /etc/issue.net -p wa -k system-locale 
+      -w /etc/hosts -p wa -k system-locale 
+      -w /etc/network -p wa -k system-locale
+  tags: system-locale-rules
+

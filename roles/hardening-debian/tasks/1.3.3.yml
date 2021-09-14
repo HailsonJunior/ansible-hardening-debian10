@@ -1,0 +1,19 @@
+--- # Ensure sudo log file exists
+- name: Create sudo log file
+  file:
+    path: /etc/sudoers.d/log
+    state: touch
+  tags: sudo-log
+
+- name: Empty file
+  lineinfile:
+    path: /etc/sudoers.d/log
+    state: absent
+    regexp: '^(.*)$'
+  tags: sudo-log
+
+- name: Configure sudo log file
+  lineinfile:
+    path: /etc/sudoers.d/log
+    line: 'Defaults logfile=\"/var/log/sudo.log\" '
+  tags: sudo-log
