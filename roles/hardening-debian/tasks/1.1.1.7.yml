@@ -6,7 +6,7 @@
   tags: fat
 
 - name: Empty file
-  file:
+  lineinfile:
     path: /etc/modprobe.d/vfat.conf
     state: absent
     regexp: '^(.*)$'
